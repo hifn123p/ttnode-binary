@@ -1,0 +1,6 @@
+# 构建上下文瘦身：静态分析产物不进入镜像
+analysis/
+.git/
+.github/
+*.md
+docker-compose.yml

@@ -1,0 +1,30 @@
+services:
+  ttnode:
+    # 改成你的 ghcr 镜像地址：ghcr.io/<GitHub用户名小写>/<仓库名小写>:latest
+    image: ghcr.io/your-github-username/ttnode-binary:latest
+    container_name: ttnode
+    hostname: ttnode
+    restart: always
+    network_mode: "host"
+    privileged: true
+    cap_add:
+      - SYS_RAWIO
+    devices:
+      - "/dev/mem:/dev/mem"
+    volumes:
+      # 节点缓存数据目录（程序内硬编码路径，与官方镜像一致；换自己的数据盘路径即可）
+      - "/vol2/1000/ttnode:/mnt/data/ttnode"
+      # 宿主机 docker（程序自更新 / 容器管理需要，与官方镜像一致）
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      # 读取宿主机硬件信息，与官方镜像一致
+      - "/proc:/host/proc:ro"
+      # 可选：持久化 /data，保住容器内自更新的 ttmanager 与运行缓存，
+      # 重启/重建容器后无需重新下载节点核心。开启后如需强制刷新程序：
+      #   docker exec ttnode rm -f /data/ttmanager /data/.cache/.execfilepath && docker restart ttnode
+      # - "/vol2/1000/ttnode/data:/data"
+    environment:
+      - container_name=ttnode
+      - TZ=Asia/Shanghai
+      # 以下两项已内置于镜像，通常无需覆盖：
+      # - NODE_TYPE=ttnode
+      # - mode=normal
