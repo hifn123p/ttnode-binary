@@ -34,11 +34,11 @@ auto.sh  →  下载 tt_installer_{amd64|arm64|arm32}
    git add Dockerfile entrypoint.sh run.sh .dockerignore docker-compose.yml .github/
    git commit -m "ttnode binary docker packaging"
    git branch -M main
-   git remote add origin https://github.com/<你的用户名>/ttnode-binary.git
+   git remote add origin https://github.com/hifn123p/ttnode-binary.git
    git push -u origin main
    ```
 2. 推送后会自动触发 Actions 构建；也可到 **Actions 页 → build-ttnode-image → Run workflow** 手动触发。
-3. 构建产物：`ghcr.io/<你的用户名>/ttnode-binary:latest`（多架构：amd64 / arm64 / armv7，另有 `20251121` 式日期标签）。
+3. 构建产物：`ghcr.io/hifn123p/ttnode-binary:latest`（多架构：amd64 / arm64 / armv7，另有 `20251121` 式日期标签）。
 4. **首次构建后**，到仓库右侧 Packages → 该镜像 → Package settings，把可见性改为 **Public**（否则 NAS 拉取需要先 `docker login ghcr.io`）。
 
 ### 2. 飞牛 NAS 上部署

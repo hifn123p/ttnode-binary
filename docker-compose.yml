@@ -1,7 +1,6 @@
 services:
   ttnode:
-    # 改成你的 ghcr 镜像地址：ghcr.io/<GitHub用户名小写>/<仓库名小写>:latest
-    image: ghcr.io/your-github-username/ttnode-binary:latest
+    image: ghcr.io/hifn123p/ttnode-binary:latest
     container_name: ttnode
     hostname: ttnode
     restart: always
